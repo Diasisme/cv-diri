@@ -1,0 +1,168 @@
+:root {
+    --bg: #ffffff;
+    --text: #222222;
+    --navbar-bg: #1e293b;
+    --navbar-text: #ffffff;
+    --card-border: #dddddd;
+    --footer-bg: #f1f5f9;
+}
+
+body.dark-mode {
+    --bg: #14171c;
+    --text: #eaeaea;
+    --navbar-bg: #0b0d10;
+    --navbar-text: #eaeaea;
+    --card-border: #333333;
+    --footer-bg: #1b1f26;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: var(--navbar-bg);
+    color: var(--navbar-text);
+    position: relative;
+}
+
+.navbar a {
+    color: var(--navbar-text);
+    text-decoration: none;
+}
+
+.menu {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* menu aktif -- ditandai lewat class "active" yang ditambahkan script.js */
+.menu a.active {
+    font-weight: bold;
+    border-bottom: 2px solid currentColor;
+}
+
+.theme-toggle,
+.hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--navbar-text);
+}
+
+.theme-toggle {
+    font-size: 1.2rem;
+}
+
+/* Hamburger disembunyikan di layar besar */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px;
+}
+
+.hamburger span {
+    width: 22px;
+    height: 2px;
+    background: var(--navbar-text);
+    display: block;
+}
+
+/* ---------- Konten ---------- */
+
+main { padding: 24px; }
+
+#cari-skill {
+    padding: 8px 12px;
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+.skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.skill-card {
+    padding: 16px;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+}
+
+footer {
+    padding: 16px 24px;
+    background: var(--footer-bg);
+    text-align: center;
+}
+
+/* ---------- Back to top ---------- */
+
+.back-to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--navbar-bg);
+    color: var(--navbar-text);
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+}
+
+.back-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ---------- Layar kecil: menu jadi hamburger ---------- */
+
+@media (max-width: 767px) {
+    .hamburger { display: flex; }
+
+    .menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--navbar-bg);
+        padding: 8px 0;
+    }
+
+    .menu.is-open { display: flex; }
+
+    .menu li { padding: 12px 24px; }
+
+    .skill-list { flex-direction: column; }
+}
+
+@media (min-width: 768px) {
+    .skill-list { flex-direction: row; flex-wrap: wrap; }
+    .skill-card { flex: 1 1 calc(33.333% - 16px); margin: 8px; }
+}
